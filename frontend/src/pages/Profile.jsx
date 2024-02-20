@@ -18,8 +18,8 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
 
   // console.log(file, "file");
-  console.log(filePerc, "filePerc");
-  console.log(formData, "formData");
+  // console.log(filePerc, "filePerc");
+  // console.log(formData, "formData");
   // console.log(fileUploadError, "fileUploadError");
 
   const handleFileUpload = (file) => {
