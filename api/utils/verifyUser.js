@@ -1,4 +1,5 @@
 import  jwt  from "jsonwebtoken";
+import { errorHandler } from "./error.js";
 
 export const veryfyToken = (req, resp, next) => {
   const token = req.cookies.access_token;
