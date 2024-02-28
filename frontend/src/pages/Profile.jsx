@@ -31,9 +31,9 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
-  console.log(error, "err user");
+  // console.log(error, "err user");
   // console.log(filePerc, "filePerc");
-  console.log(formData, "formData");
+  // console.log(formData, "formData");
   // console.log(fileUploadError, "fileUploadError");
 
   const handleFileUpload = (file) => {
