@@ -168,7 +168,7 @@ const CreateListing = () => {
         setError(data.message);
       }
       alert("listing created successfully");
-      navigate(`/lising/${data._id}`);
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(data.message);
       setLoading(false);
@@ -191,7 +191,7 @@ const CreateListing = () => {
             className="border p-3 rounded-lg"
             id="name"
             maxLength={62}
-            minLength={10}
+            minLength={5}
             required
             onChange={handleChange}
             value={formData.name}
@@ -202,7 +202,7 @@ const CreateListing = () => {
             className="border p-3 rounded-lg"
             id="description"
             maxLength={62}
-            minLength={10}
+            minLength={1000}
             required
             onChange={handleChange}
             value={formData.description}

@@ -151,16 +151,24 @@ const Profile = () => {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/v1/listing/delete/${listingId}`, {
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        console.log(data.message);
-        return;
+      // Show confirmation dialog
+      const confirmed = window.confirm("Are you sure you want to delete?");
+      
+      // If user confirms deletion
+      if (confirmed) {
+        const res = await fetch(`/api/v1/listing/delete/${listingId}`, {
+          method: "DELETE",
+        });
+        const data = await res.json();
+        
+        if (data.success === false) {
+          console.log(data.message);
+          return;
+        }
+  
+        // Update user listings
+        setUserListings((prev) => prev.filter((listing) => listing._id !== listingId));
       }
-
-      setUserListings((prev)=>prev.filter((listing)=>listing._id !== listingId))
     } catch (error) {
       console.log(error.message);
     }
