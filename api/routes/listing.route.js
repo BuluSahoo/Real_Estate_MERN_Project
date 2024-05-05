@@ -1,14 +1,19 @@
 import express from "express";
-import { createListing, getUserListings, deleteListings, updateListings, getListings } from "../controllers/listing.controller.js";
+import {
+  createListing,
+  deleteListings,
+  updateListings,
+  getListing,
+  getListings,
+} from "../controllers/listing.controller.js";
 import { veryfyToken } from "../utils/verifyUser.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/create', createListing)
-router.get('/:id', veryfyToken, getUserListings)
-router.delete('/delete/:id', veryfyToken, deleteListings)
-router.post('/update/:id', veryfyToken, updateListings)
-router.get('/get/:id', getListings)
+router.post("/create", createListing);
+router.delete("/delete/:id", veryfyToken, deleteListings);
+router.post("/update/:id", veryfyToken, updateListings);
+router.get("/get/:id", getListing);
+router.get("/get", getListings);
 
-
-export default router
+export default router;

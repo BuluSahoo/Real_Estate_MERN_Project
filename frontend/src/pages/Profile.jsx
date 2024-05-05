@@ -135,7 +135,7 @@ const Profile = () => {
     setShowListingError(false);
     setLoadingListing(true);
     try {
-      const res = await fetch(`/api/v1/listing/${currentUser._id}`);
+      const res = await fetch(`/api/v1/user/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
         setShowListingError(true);
