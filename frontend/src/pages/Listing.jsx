@@ -14,6 +14,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 const Listing = () => {
   const [listing, setListing] = useState(null);
@@ -92,7 +93,7 @@ const Listing = () => {
           )}
         </div>
       )}
-      <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
+      <div className="flex flex-col max-w-6xl mx-auto p-3 my-7 gap-4">
         <p className="text-2xl font-semibold">
           {listing?.name} - ${" "}
           {listing?.offer
@@ -121,11 +122,15 @@ const Listing = () => {
         <ul className=" text-green-900 font-bold text-sm flex gap-4 items-center sm:gap-6 flex-wrap ">
           <li className=" flex gap-2 items-center whitespace-nowrap">
             <FaBed className=" text-lg" />
-            {listing?.bedrooms > 1 ? `${listing?.bedrooms} beds` : `${listing?.bedrooms} bed`}
+            {listing?.bedrooms > 1
+              ? `${listing?.bedrooms} beds`
+              : `${listing?.bedrooms} bed`}
           </li>
           <li className=" flex gap-2 items-center whitespace-nowrap">
             <FaBath className=" text-lg" />
-            {listing?.bathrooms > 1 ? `${listing?.bathrooms} baths` : `${listing?.bathrooms}  bath`}
+            {listing?.bathrooms > 1
+              ? `${listing?.bathrooms} baths`
+              : `${listing?.bathrooms}  bath`}
           </li>
           <li className=" flex gap-2 items-center whitespace-nowrap">
             <FaParking className=" text-lg" />
@@ -133,9 +138,15 @@ const Listing = () => {
           </li>
           <li className=" flex gap-2 items-center whitespace-nowrap">
             <FaChair className=" text-lg" />
-            {listing?.furnished ?"Furnished" : "Unfurnished"}
+            {listing?.furnished ? "Furnished" : "Unfurnished"}
           </li>
         </ul>
+        {currentUser && listing?.userRef !== currentUser._id && !contact && (
+          <button onClick={()=>setContact(true)} className=" bg-slate-700 text-white rounded-lg uppercase hover:opacity-90 p-3">
+            Contact Landlord
+          </button>
+        )}
+        {contact && <Contact listing={listing}/>}
       </div>
     </main>
   );
