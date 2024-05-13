@@ -32,6 +32,8 @@ const Profile = () => {
   const [showListingError, setShowListingError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [loadingListing, setLoadingListing] = useState(false);
+  const [noListing, SetNoListing] = useState(false);
+
 
   const dispatch = useDispatch();
 
@@ -134,6 +136,8 @@ const Profile = () => {
   const handleShowListings = async () => {
     setShowListingError(false);
     setLoadingListing(true);
+    SetNoListing(true)
+
     try {
       const res = await fetch(`/api/v1/user/${currentUser._id}`);
       const data = await res.json();
@@ -307,6 +311,9 @@ const Profile = () => {
           ))}
         </div>
       )}
+      {userListings.length == 0 && noListing &&
+      <p className="">Listing not found</p>
+      }
     </div>
   );
 };

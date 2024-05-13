@@ -10,8 +10,6 @@ export const createListing = async (req, res, next) => {
   }
 };
 
-
-
 export const deleteListings = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
 
@@ -51,6 +49,8 @@ export const updateListings = async (req, res, next) => {
   }
 };
 
+// get details of a sigle listing
+
 export const getListing = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -63,6 +63,8 @@ export const getListing = async (req, res, next) => {
     next(error);
   }
 };
+
+// get search listings
 
 export const getListings = async (req, res, next) => {
   try {

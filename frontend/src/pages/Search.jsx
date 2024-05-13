@@ -18,7 +18,7 @@ const Search = () => {
 
   const navigate = useNavigate();
 
-  console.log(listings, "sidebardata")
+  console.log(listings, "sidebardata");
 
   const handleChange = (e) => {
     if (
@@ -62,6 +62,19 @@ const Search = () => {
     urlParams.set("order", sidebardata.order);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+  const onShowMoreClick = async () => {
+    const numberOfListings = listings.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/v1/listing/get?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setListings([...listings, ...data])
   };
 
   useEffect(() => {
@@ -217,19 +230,28 @@ const Search = () => {
           Listing Results:
         </h1>
         <div className=" p-7 flex flex-wrap gap-4">
-          {!loading && listings.length === 0 && 
+          {!loading && listings.length === 0 && (
             <p className=" text-xl text-slate-700">No Listing Found!</p>
-          }
+          )}
           {loading && (
-            <p className=" text-xl text-slate-700 text-center w-full">Loading...</p>
+            <p className=" text-xl text-slate-700 text-center w-full">
+              Loading...
+            </p>
           )}
 
-          {
-            !loading && listings && 
-            listings.map((listing)=>(
+          {!loading &&
+            listings &&
+            listings.map((listing) => (
               <ListingItem key={listing._id} listing={listing} />
-            ))
-          }
+            ))}
+          {showMore && (
+            <button
+              onClick={onShowMoreClick}
+              className=" text-green-700 hover:underline p-7 text-center w-full "
+            >
+              Show More
+            </button>
+          )}
         </div>
       </div>
     </div>
